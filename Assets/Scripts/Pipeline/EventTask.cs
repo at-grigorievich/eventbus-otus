@@ -20,29 +20,3 @@ public abstract class EventTask
     protected abstract void OnStart();
     protected virtual void OnComplete() {}
 }
-
-public class FinishTurnTask : EventTask
-{
-    protected override void OnStart()
-    {
-        Complete();
-    }
-
-    protected override void OnComplete()
-    {
-        Debug.Log("Complete finish turn task ");
-    }
-}
-
-public class StartTurnTask : EventTask
-{
-    protected override void OnStart()
-    {
-        Complete();
-    }
-
-    protected override void OnComplete()
-    {
-        Debug.Log("complete start turn task");
-    }
-}

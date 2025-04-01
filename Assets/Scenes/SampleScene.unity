@@ -251,6 +251,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeroView (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1245,6 +1249,16 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
+  linearHeroCreator:
+    configs:
+    - {fileID: 11400000, guid: 49244c97c6db91d499243015e5770a0a, type: 2}
+    - {fileID: 11400000, guid: c49330ccd00d6f549a7da463b0154d18, type: 2}
+    - {fileID: 11400000, guid: 6e04d9f6fa16b5946938af2ab33c85df, type: 2}
+    - {fileID: 11400000, guid: 6e04d9f6fa16b5946938af2ab33c85df, type: 2}
+    - {fileID: 11400000, guid: 2272bbb6f0b4d1949b3d8a373e6908e4, type: 2}
+    - {fileID: 11400000, guid: e4d0ebfb42545ab4abb612abc9f69231, type: 2}
+    - {fileID: 11400000, guid: 33030b74e794a384a82e673998796ecc, type: 2}
+    - {fileID: 11400000, guid: 93c425e0d2a14b344a00bd965cc40295, type: 2}
 --- !u!4 &1263640422
 Transform:
   m_ObjectHideFlags: 0
@@ -1777,7 +1791,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2004316434}
-  - component: {fileID: 2004316433}
   m_Layer: 0
   m_Name: '[Pipeline]'
   m_TagString: Untagged
@@ -1785,18 +1798,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2004316433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2004316432}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5084da90846403ca93fcb3244d80297, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2004316434
 Transform:
   m_ObjectHideFlags: 0
