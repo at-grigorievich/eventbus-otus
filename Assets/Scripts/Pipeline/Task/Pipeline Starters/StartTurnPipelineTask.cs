@@ -1,5 +1,4 @@
-﻿using System;
-using VContainer;
+﻿using VContainer;
 
 namespace DefaultNamespace
 {
@@ -18,7 +17,9 @@ namespace DefaultNamespace
         {
             _turnPipeline.OnCompleted += OnPipelineCompleted;
             
+            _turnPipeline.AddTask(new NextMoveTask(_objectResolver));
             _turnPipeline.AddTask(new StartVisualTurnPipelineTask(_objectResolver));
+            _turnPipeline.AddTask(new StartFightTask(_objectResolver));
             
             _turnPipeline.Reset();
             _turnPipeline.Run();

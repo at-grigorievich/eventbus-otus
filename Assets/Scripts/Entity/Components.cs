@@ -33,9 +33,6 @@ namespace DefaultNamespace
     {
         public byte Value;
     }
-
-    public struct TeamIndex : IComponent
-    {
-        public int Value;
-    }
+    
+    public struct MasterMarker : IComponent {}
 }

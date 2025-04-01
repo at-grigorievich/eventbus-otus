@@ -18,13 +18,13 @@ namespace DefaultNamespace
         {
             _eventBus.Raise(new CreateHeroesEvent
             {
-                TeamType = Hero.Team.Blue,
+                TeamType = Hero.TeamType.Blue,
                 HeroCount = _unitsPerTeam
             });
             
             _eventBus.Raise(new CreateHeroesEvent
             {
-                TeamType = Hero.Team.Red,
+                TeamType = Hero.TeamType.Red,
                 HeroCount = _unitsPerTeam
             });
             

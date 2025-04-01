@@ -3,13 +3,13 @@ using VContainer.Unity;
 
 namespace DefaultNamespace
 {
-    public class CardFightPipeline: Pipeline, IInitializable
+    public class RootPipeline: Pipeline, IInitializable
     {
         private const int UNITS_PER_TEAM = 4;
             
         private readonly IObjectResolver _objectResolver;
         
-        public CardFightPipeline(IObjectResolver resolver)
+        public RootPipeline(IObjectResolver resolver)
         {
             _objectResolver = resolver;
         }

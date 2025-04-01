@@ -2,7 +2,7 @@
 {
     public struct CreateHeroesEvent: IEvent
     {
-        public Hero.Team TeamType;
+        public Hero.TeamType TeamType;
         public int HeroCount;
     }
 }

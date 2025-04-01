@@ -41,7 +41,7 @@ namespace DefaultNamespace.Event_Bus.Handlers
             var heroes = 
                 _heroTeamsService.AddNewHeroes(evt.TeamType, evt.HeroCount);
 
-            var heroesView = evt.TeamType == Hero.Team.Blue
+            var heroesView = evt.TeamType == Hero.TeamType.Blue
                     ? _uiService.GetBluePlayer()
                     : _uiService.GetRedPlayer();
             
@@ -50,7 +50,7 @@ namespace DefaultNamespace.Event_Bus.Handlers
                 HeroView heroView = heroesView.GetView(i);
                 Entity hero = heroes[i];
                 
-                _turnVisualPipeline.AddTask(new UpdateHeroViewTask(hero, heroView));
+                _turnVisualPipeline.AddTask(new SetupHeroViewTask(hero, heroView));
             }
         }
 

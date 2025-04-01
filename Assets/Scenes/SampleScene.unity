@@ -428,6 +428,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 743752122}
     m_Modifications:
+    - target: {fileID: 1406148263, guid: 291ab9f483432480c8815884e98cd0a0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 383512544197517689, guid: 291ab9f483432480c8815884e98cd0a0, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1254,7 +1258,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 49244c97c6db91d499243015e5770a0a, type: 2}
     - {fileID: 11400000, guid: c49330ccd00d6f549a7da463b0154d18, type: 2}
     - {fileID: 11400000, guid: 6e04d9f6fa16b5946938af2ab33c85df, type: 2}
-    - {fileID: 11400000, guid: 6e04d9f6fa16b5946938af2ab33c85df, type: 2}
+    - {fileID: 11400000, guid: e30f6c9186b1bbf40a770d7cd523eba9, type: 2}
     - {fileID: 11400000, guid: 2272bbb6f0b4d1949b3d8a373e6908e4, type: 2}
     - {fileID: 11400000, guid: e4d0ebfb42545ab4abb612abc9f69231, type: 2}
     - {fileID: 11400000, guid: 33030b74e794a384a82e673998796ecc, type: 2}

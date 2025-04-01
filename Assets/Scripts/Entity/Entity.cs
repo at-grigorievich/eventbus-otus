@@ -24,19 +24,16 @@ namespace DefaultNamespace
         }
         
         
-        public bool TryRemoveComponent<T>() where T: IComponent
+        public void RemoveComponent<T>() where T: IComponent
         {
             Type cType = typeof(T);
 
-            if (_components.ContainsKey(cType) == false)
+            /*if (_components.ContainsKey(cType) == false)
             {
-                //throw new ArgumentException($"Component {component.GetType()} is not existed");
-                return false;
-            }
+                throw new ArgumentException($"Component {cType} is not existed");
+            }*/
             
             _components.Remove(cType);
-
-            return true;
         }
 
         public bool TryGetComponent<T>(out T component) where T: IComponent

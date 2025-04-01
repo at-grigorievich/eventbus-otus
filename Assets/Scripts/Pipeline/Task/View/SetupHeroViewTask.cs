@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class UpdateHeroViewTask: EventTask
+    public class SetupHeroViewTask: EventTask
     {
         private readonly Entity _heroEntity;
         private readonly HeroView _view;
 
-        public UpdateHeroViewTask(Entity heroEntity, HeroView view)
+        public SetupHeroViewTask(Entity heroEntity, HeroView view)
         {
             _heroEntity = heroEntity;
             _view = view;
