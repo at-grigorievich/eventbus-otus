@@ -11,7 +11,14 @@ namespace DefaultNamespace
         {
             Type cType = component.GetType();
 
-            _components.TryAdd(cType, component);
+            if (_components.ContainsKey(cType) == false)
+            {
+                _components.TryAdd(cType, component);
+            }
+            else
+            {
+                _components[cType] = component;
+            }
 
             return this;
         }

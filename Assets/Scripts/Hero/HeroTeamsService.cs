@@ -21,15 +21,29 @@ namespace DefaultNamespace.Hero
             _heroFactory = heroCreator;
         }
 
-        public void AddNewHeroes(Team team, int count)
+        public IReadOnlyList<Entity> AddNewHeroes(Team team, int count)
         {
+            List<Entity> heroes = new(count);
+            
             for (int i = 0; i < count; i++)
             {
-                AddNewHero(team);
+                heroes.Add(AddNewHero(team));
             }
+
+            return heroes;
+        }
+
+        public List<Entity> GetHeroes(Team team)
+        {
+            if (Heroes.ContainsKey(team) == false)
+            {
+                return new List<Entity>();
+            }
+
+            return Heroes[team];
         }
         
-        public void AddNewHero(Team team)
+        public Entity AddNewHero(Team team)
         {
             Entity entity = _heroFactory.GetNextHero();
             entity.AddComponent(new DefaultNamespace.Team { Value = (byte)team });
@@ -40,6 +54,8 @@ namespace DefaultNamespace.Hero
             }
             
             Heroes[team].Add(entity);
+
+            return entity;
         }
 
         public void RemoveHero(Team team)
