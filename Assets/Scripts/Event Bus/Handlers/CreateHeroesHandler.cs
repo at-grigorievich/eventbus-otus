@@ -6,36 +6,22 @@ using VContainer.Unity;
 
 namespace DefaultNamespace.Event_Bus.Handlers
 {
-    public sealed class CreateHeroesHandler: IEventReceiver<CreateHeroesEvent>, IInitializable, IDisposable
+    public sealed class CreateHeroesHandler: EventReceiver<CreateHeroesEvent>, IInitializable, IDisposable
     {
         private readonly HeroTeamsService _heroTeamsService;
-        private readonly EventBus _eventBus;
         
         private readonly IObjectResolver _resolver;
         private readonly TurnVisualPipeline _turnVisualPipeline;
         
-        public UniqueId Id { get; } = new ();
-        
         public CreateHeroesHandler(HeroTeamsService heroTeamsService, EventBus eventBus, 
-            IObjectResolver resolver, TurnVisualPipeline turnVisualPipeline)
+            IObjectResolver resolver, TurnVisualPipeline turnVisualPipeline): base(eventBus)
         {
             _heroTeamsService = heroTeamsService;
-            _eventBus = eventBus;
             _resolver = resolver;
             _turnVisualPipeline = turnVisualPipeline;
         }
-
-        public void Enter()
-        {
-            _eventBus.Register(this);
-        }
-
-        public void Exit()
-        {
-            _eventBus.Unregister(this);
-        }
         
-        public void OnEvent(CreateHeroesEvent evt)
+        public override void OnEvent(CreateHeroesEvent evt)
         {
             var heroes = 
                 _heroTeamsService.AddNewHeroes(evt.TeamType, evt.HeroCount);

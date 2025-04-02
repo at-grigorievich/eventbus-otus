@@ -4,18 +4,11 @@ using VContainer.Unity;
 
 namespace DefaultNamespace.Event_Bus.Handlers
 {
-    public class RechargeFightHandler: IEventReceiver<RechargeFightEvent>, IInitializable, IDisposable
+    public class RechargeFightHandler: EventReceiver<RechargeFightEvent>, IInitializable, IDisposable
     {
-        private EventBus _eventBus;
+        public RechargeFightHandler(EventBus eventBus): base(eventBus) { }
         
-        public UniqueId Id { get; } = new();
-
-        public RechargeFightHandler(EventBus eventBus)
-        {
-            _eventBus = eventBus;
-        }
-        
-        public void OnEvent(RechargeFightEvent evt)
+        public override void OnEvent(RechargeFightEvent evt)
         {
             var defenderHealth = evt.Defender.GetComponent<Health>().Value;
 
@@ -26,16 +19,6 @@ namespace DefaultNamespace.Event_Bus.Handlers
             }
             
             _eventBus.Raise(new FightEvent(evt.Defender, evt.Attacker));
-        }
-
-        public void Enter()
-        {
-            _eventBus.Register(this);
-        }
-
-        public void Exit()
-        {
-            _eventBus.Unregister(this);
         }
 
         public void Initialize() => Enter();

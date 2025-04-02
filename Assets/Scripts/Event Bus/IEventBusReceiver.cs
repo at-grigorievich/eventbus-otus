@@ -5,10 +5,19 @@ public interface IBaseEventReceiver
     public UniqueId Id { get; }
 }
 
-public interface IEventReceiver<T>: IBaseEventReceiver where T: struct, IEvent
+public abstract class EventReceiver<T>: IBaseEventReceiver where T: struct, IEvent
 {
-    void OnEvent(T evt);
+    protected readonly EventBus _eventBus;
 
-    void Enter();
-    void Exit();
+    public UniqueId Id { get; } = new();
+    
+    public EventReceiver(EventBus eventBus)
+    {
+        _eventBus = eventBus;
+    }
+    
+    public abstract void OnEvent(T evt);
+
+    protected virtual void Enter() => _eventBus.Register(this);
+    protected virtual void Exit() => _eventBus.Unregister(this);
 }

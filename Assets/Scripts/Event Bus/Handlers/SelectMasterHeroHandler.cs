@@ -7,27 +7,23 @@ using VContainer.Unity;
 
 namespace DefaultNamespace.Event_Bus.Handlers
 {
-    public class SelectMasterHeroHandler: IEventReceiver<NextMoveEvent>, IInitializable, IDisposable
+    public class SelectMasterHeroHandler: EventReceiver<NextMoveEvent>, IInitializable, IDisposable
     {
-        private readonly EventBus _eventBus;
         private readonly HeroTeamsService _heroTeamsService;
         
         private readonly UIService _uiService;
         private readonly TurnVisualPipeline _turnVisualPipeline;
-        
-        public UniqueId Id { get; } = new();
 
         public SelectMasterHeroHandler(EventBus eventBus, HeroTeamsService heroTeamsService, 
-            TurnVisualPipeline turnVisualPipeline, UIService uiService)
+            TurnVisualPipeline turnVisualPipeline, UIService uiService): base(eventBus)
         {
-            _eventBus = eventBus;
             _heroTeamsService = heroTeamsService;
             
             _turnVisualPipeline = turnVisualPipeline;
             _uiService = uiService;
         }
         
-        public void OnEvent(NextMoveEvent evt)
+        public override void OnEvent(NextMoveEvent evt)
         {
             TeamType currentMasterTeam = _heroTeamsService.SwapMoveTeam();
             
@@ -40,29 +36,10 @@ namespace DefaultNamespace.Event_Bus.Handlers
                new SetMasterHeroViewMarkerTask(_heroTeamsService, _uiService)); 
         }
 
-        public void Enter()
-        {
-            _eventBus.Register(this);
-        }
-
-        public void Exit()
-        {
-            _eventBus.Unregister(this);
-        }
-
         public void Initialize() => Enter();
 
         public void Dispose() => Exit();
-
-        private TeamType SelectFirstMoveTeam()
-        {
-            int rnd = UnityEngine.Random.Range(0, 11);
-            
-            if(rnd % 2 == 0) return TeamType.Blue;
-            return TeamType.Red;
-        }
         
-
         private void RemoveMasterMarkerFromWaitTeam()
         {
             TeamType waitTeam = _heroTeamsService.MasterTeam == TeamType.Blue ? TeamType.Red : TeamType.Blue;

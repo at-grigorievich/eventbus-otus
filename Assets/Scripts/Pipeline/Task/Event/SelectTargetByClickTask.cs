@@ -2,7 +2,6 @@
 using DefaultNamespace.Event_Bus.Events;
 using DefaultNamespace.Hero;
 using UI;
-using UnityEngine;
 using VContainer;
 
 namespace DefaultNamespace

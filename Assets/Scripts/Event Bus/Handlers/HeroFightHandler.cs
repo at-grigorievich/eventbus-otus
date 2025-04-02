@@ -6,24 +6,19 @@ using VContainer.Unity;
 
 namespace DefaultNamespace.Event_Bus.Handlers
 {
-    public class HeroFightHandler: IEventReceiver<FightEvent>, IInitializable, IDisposable
+    public class HeroFightHandler: EventReceiver<FightEvent>, IInitializable, IDisposable
     {
-        private readonly EventBus _eventBus;
         private readonly FightVisualPipeline _fightVisualPipeline;
         private readonly IObjectResolver _resolver;
-        
-        public UniqueId Id { get; } = new();
 
         public HeroFightHandler(EventBus eventBus, FightVisualPipeline fightVisualPipeline, 
-            IObjectResolver resolver)
+            IObjectResolver resolver): base(eventBus)
         {
-            _eventBus = eventBus;
             _fightVisualPipeline = fightVisualPipeline;
-
             _resolver = resolver;
         }
         
-        public void OnEvent(FightEvent evt)
+        public override void OnEvent(FightEvent evt)
         {
             var defenderHealth = evt.Defender.GetComponent<Health>().Value;
             var attackerDamage = evt.Attacker.GetComponent<Damage>().Value;
@@ -37,16 +32,6 @@ namespace DefaultNamespace.Event_Bus.Handlers
             {
                 _eventBus.Raise(new DeathEvent(evt.Defender));
             }
-        }
-        
-        public void Enter()
-        {
-            _eventBus.Register(this);
-        }
-
-        public void Exit()
-        {
-            _eventBus.Unregister(this);
         }
 
         public void Initialize() => Enter();

@@ -7,7 +7,7 @@ public class EventBus
     private readonly Dictionary<Type, List<WeakReference<IBaseEventReceiver>>> _receivers = new();
     private readonly Dictionary<string, WeakReference<IBaseEventReceiver>> _receiversByHash = new();
 
-    public void Register<T>(IEventReceiver<T> receiver) where T : struct, IEvent
+    public void Register<T>(EventReceiver<T> receiver) where T : struct, IEvent
     {
         Type eventType = typeof(T);
 
@@ -25,7 +25,7 @@ public class EventBus
         _receivers[eventType].Add(weakReceiver);
     }
 
-    public void Unregister<T>(IEventReceiver<T> receiver) where T : struct, IEvent
+    public void Unregister<T>(EventReceiver<T> receiver) where T : struct, IEvent
     {
         Type eventType = typeof(T);
         if (_receivers.ContainsKey(eventType) == false || _receiversByHash.ContainsKey(receiver.Id) == false)
@@ -52,7 +52,7 @@ public class EventBus
         for (int i = references.Count - 1; i >= 0; i--)
         {
             if (references[i].TryGetTarget(out IBaseEventReceiver receiver))
-                ((IEventReceiver<T>)receiver).OnEvent(@event);
+                ((EventReceiver<T>)receiver).OnEvent(@event);
         }
     }
 }
