@@ -26,7 +26,10 @@ namespace UI
         {
             foreach (var view in this.views)
             {
-                view.OnClicked += () => this.OnHeroClicked?.Invoke(view);
+                view.OnClicked += () =>
+                {
+                    this.OnHeroClicked?.Invoke(view);
+                };
             }
         }
 

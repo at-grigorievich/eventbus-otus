@@ -1,15 +1,6 @@
-﻿using VContainer;
-using VContainer.Unity;
-
-namespace DefaultNamespace
+﻿namespace DefaultNamespace
 {
     public class TurnPipeline : Pipeline
     {
-        private readonly IObjectResolver _objectResolver;
-        
-        public TurnPipeline(IObjectResolver resolver)
-        {
-            _objectResolver = resolver;
-        }
     }
 }

@@ -4,35 +4,35 @@ namespace DefaultNamespace
 {
     public interface IComponent {}
     
-    public struct Name : IComponent
+    public class Name : IComponent
     {
         public string Value;
     }
 
-    public struct Icon : IComponent
+    public class Icon : IComponent
     {
         public Sprite Value;
     }
 
-    public struct Description : IComponent
+    public class Description : IComponent
     {
         public string Value;
     }
 
-    public struct Health : IComponent
+    public class Health : IComponent
     {
         public int Value;
     }
 
-    public struct Damage : IComponent
+    public class Damage : IComponent
     {
         public int Value;
     }
 
-    public struct Team : IComponent
+    public class Team : IComponent
     {
         public byte Value;
     }
     
-    public struct MasterMarker : IComponent {}
+    public class MasterMarker : IComponent {}
 }

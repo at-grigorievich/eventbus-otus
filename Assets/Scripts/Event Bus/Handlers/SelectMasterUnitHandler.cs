@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using DefaultNamespace.Event_Bus.Events;
 using DefaultNamespace.Hero;
 using UI;
-using UnityEngine;
 using VContainer.Unity;
 
 namespace DefaultNamespace.Event_Bus.Handlers
@@ -77,7 +76,7 @@ namespace DefaultNamespace.Event_Bus.Handlers
 
         private void AddMarkerHeroInMasterTeam()
         {
-            IReadOnlyCollection<Entity> masters = _heroTeamsService.GetHeroes(SelectFirstMoveTeam());
+            IReadOnlyCollection<Entity> masters = _heroTeamsService.GetHeroes(_heroTeamsService.MasterTeam);
             int requiredIndex = _heroTeamsService[_heroTeamsService.MasterTeam].ActiveHeroIndex;
 
             int count = 0;

@@ -1,8 +1,7 @@
 ﻿using System;
 using DefaultNamespace.Event_Bus.Events;
 using DefaultNamespace.Hero;
-using UI;
-using UnityEngine;
+using VContainer;
 using VContainer.Unity;
 
 namespace DefaultNamespace.Event_Bus.Handlers
@@ -12,17 +11,17 @@ namespace DefaultNamespace.Event_Bus.Handlers
         private readonly HeroTeamsService _heroTeamsService;
         private readonly EventBus _eventBus;
         
-        private readonly UIService _uiService;
+        private readonly IObjectResolver _resolver;
         private readonly TurnVisualPipeline _turnVisualPipeline;
         
         public UniqueId Id { get; } = new ();
         
         public CreateHeroesHandler(HeroTeamsService heroTeamsService, EventBus eventBus, 
-            UIService uiService, TurnVisualPipeline turnVisualPipeline)
+            IObjectResolver resolver, TurnVisualPipeline turnVisualPipeline)
         {
             _heroTeamsService = heroTeamsService;
             _eventBus = eventBus;
-            _uiService = uiService;
+            _resolver = resolver;
             _turnVisualPipeline = turnVisualPipeline;
         }
 
@@ -41,16 +40,12 @@ namespace DefaultNamespace.Event_Bus.Handlers
             var heroes = 
                 _heroTeamsService.AddNewHeroes(evt.TeamType, evt.HeroCount);
 
-            var heroesView = evt.TeamType == Hero.TeamType.Blue
-                    ? _uiService.GetBluePlayer()
-                    : _uiService.GetRedPlayer();
-            
+
             for (var i = 0; i < heroes.Count; i++)
             {
-                HeroView heroView = heroesView.GetView(i);
                 Entity hero = heroes[i];
                 
-                _turnVisualPipeline.AddTask(new SetupHeroViewTask(hero, heroView));
+                _turnVisualPipeline.AddTask(new ShowHeroViewTask(hero, _resolver));
             }
         }
 

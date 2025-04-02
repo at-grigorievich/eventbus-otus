@@ -19,7 +19,8 @@ namespace DefaultNamespace
             
             _turnPipeline.AddTask(new NextMoveTask(_objectResolver));
             _turnPipeline.AddTask(new StartVisualTurnPipelineTask(_objectResolver));
-            _turnPipeline.AddTask(new StartFightTask(_objectResolver));
+            _turnPipeline.AddTask(new SelectTargetByClickTask(_objectResolver));
+            _turnPipeline.AddTask(new StartAttackVisualPipeline(_objectResolver));
             
             _turnPipeline.Reset();
             _turnPipeline.Run();

@@ -36,6 +36,16 @@ namespace DefaultNamespace
             _components.Remove(cType);
         }
 
+        public T GetComponent<T>() where T : IComponent
+        {
+            Type cType = typeof(T);
+
+            if (_components.TryGetValue(cType, out IComponent result) == false)
+                throw new NullReferenceException($"No component of type {cType} was found.");
+            
+            return (T)result;
+        }
+        
         public bool TryGetComponent<T>(out T component) where T: IComponent
         {
             Type cType = typeof(T);

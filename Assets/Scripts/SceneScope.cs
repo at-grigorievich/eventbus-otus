@@ -23,10 +23,12 @@ namespace DefaultNamespace
 
             builder.Register<CreateHeroesHandler>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<SelectMasterUnitHandler>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<FightHandler>(Lifetime.Singleton).AsImplementedInterfaces();
             
             builder.Register<RootPipeline>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<TurnPipeline>(Lifetime.Singleton).AsSelf();
             builder.Register<TurnVisualPipeline>(Lifetime.Singleton).AsSelf();
+            builder.Register<FightVisualPipeline>(Lifetime.Singleton).AsSelf();
         }
     }
 }
