@@ -1,4 +1,5 @@
-﻿using DefaultNamespace.Event_Bus.Events;
+﻿using System;
+using DefaultNamespace.Event_Bus.Events;
 using DefaultNamespace.Hero;
 using UI;
 using UnityEngine;
@@ -42,7 +43,7 @@ namespace DefaultNamespace
             Entity defender = GetDefenderEntity(obj);
             
             _eventBus.Raise(new FightEvent(attacker, defender));
-            _eventBus.Raise(new FightEvent(defender, attacker));
+            _eventBus.Raise(new RechargeFightEvent(attacker, defender));
             
             Complete();
         }
@@ -50,17 +51,28 @@ namespace DefaultNamespace
         private Entity GetAttackerEntity()
         {
             HeroTeam teamAttacker = _heroTeamsService[_heroTeamsService.MasterTeam];
-            Entity attacker = teamAttacker.Heroes[teamAttacker.ActiveHeroIndex];
 
-            return attacker;
+            foreach (var entity in teamAttacker.Heroes)
+            {
+                if (entity.TryGetComponent(out MasterMarker masterMarker) == true)
+                    return entity;
+            }
+
+            throw new NullReferenceException("No master hero selected");
         }
 
         private Entity GetDefenderEntity(HeroView obj)
         {
             HeroTeam teamDefender = _heroTeamsService[_defenderTeamType];
-            Entity defender = teamDefender.Heroes[GetDefenderIndex()];
+            int requireIndex = GetDefenderIndex();
             
-            return defender;
+            foreach (var hero in teamDefender.Heroes)
+            {
+                if (hero.GetComponent<ViewIndex>().Value == requireIndex)
+                    return hero;
+            }
+
+            throw new IndexOutOfRangeException("Entity with index " + requireIndex + " not found");
             
             int GetDefenderIndex()
             {

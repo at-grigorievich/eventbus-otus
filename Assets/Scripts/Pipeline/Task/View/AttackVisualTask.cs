@@ -1,7 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using DefaultNamespace.Hero;
 using UI;
-using Unity.VisualScripting;
 using VContainer;
 
 namespace DefaultNamespace
@@ -12,7 +11,6 @@ namespace DefaultNamespace
         private readonly Entity _defenderEntity;
 
         private readonly UIService _uiService;
-        private readonly HeroTeamsService _heroTeamsService;
 
         public AttackVisualTask(Entity attackerEntity, Entity defenderEntity, IObjectResolver resolver)
         {
@@ -20,17 +18,16 @@ namespace DefaultNamespace
             _defenderEntity = defenderEntity;
             
             _uiService = resolver.Resolve<UIService>();
-            _heroTeamsService = resolver.Resolve<HeroTeamsService>();
         }
         
         protected override void OnStart()
         {
             TeamType defenderTeam = (TeamType)_defenderEntity.GetComponent<Team>().Value;
             TeamType attackerTeam = (TeamType)_attackerEntity.GetComponent<Team>().Value;
-            
-            _heroTeamsService[defenderTeam].TryGetHeroView(_uiService, _defenderEntity, out HeroView defenderView);
-            _heroTeamsService[attackerTeam].TryGetHeroView(_uiService, _attackerEntity, out HeroView attackerView);
-            
+
+            HeroView defenderView = _defenderEntity.GetHeroView(_uiService);
+            HeroView attackerView = _attackerEntity.GetHeroView(_uiService);
+
             SetCanvasOrder(defenderTeam, false);
             SetCanvasOrder(attackerTeam, true);
             

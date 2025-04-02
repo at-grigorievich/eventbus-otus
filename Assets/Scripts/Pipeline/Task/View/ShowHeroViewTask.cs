@@ -1,4 +1,5 @@
-﻿using DefaultNamespace.Hero;
+﻿using System;
+using DefaultNamespace.Hero;
 using UI;
 using UnityEngine;
 using VContainer;
@@ -7,33 +8,25 @@ namespace DefaultNamespace
 {
     public class ShowHeroViewTask: EventTask
     {
-        private readonly IObjectResolver _resolver;
+        private readonly UIService _uiService;
         private readonly Entity _heroEntity;
         
         public ShowHeroViewTask(Entity heroEntity, IObjectResolver resolver)
         {
             _heroEntity = heroEntity;
-            _resolver = resolver;
+            _uiService = resolver.Resolve<UIService>();
         }
         
         protected override void OnStart()
         {
-            UIService uiService = _resolver.Resolve<UIService>();
-            HeroTeamsService heroTeamsService = _resolver.Resolve<HeroTeamsService>();
-
             if (_heroEntity.TryGetComponent(out Team teamType) == false)
             {
                 Complete();
                 return;
             }
 
-            HeroTeam team = heroTeamsService[(TeamType)teamType.Value];
-
-            if (team.TryGetHeroView(uiService, _heroEntity, out HeroView view) == false)
-            {
-                Complete();
-                return;
-            }
+            HeroView view = _heroEntity.GetHeroView(_uiService);
+            
             //ShowName();
             //ShowDescription();
             

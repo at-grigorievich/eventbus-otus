@@ -7,7 +7,7 @@ using VContainer.Unity;
 
 namespace DefaultNamespace.Event_Bus.Handlers
 {
-    public class SelectMasterUnitHandler: IEventReceiver<NextMoveEvent>, IInitializable, IDisposable
+    public class SelectMasterHeroHandler: IEventReceiver<NextMoveEvent>, IInitializable, IDisposable
     {
         private readonly EventBus _eventBus;
         private readonly HeroTeamsService _heroTeamsService;
@@ -17,7 +17,7 @@ namespace DefaultNamespace.Event_Bus.Handlers
         
         public UniqueId Id { get; } = new();
 
-        public SelectMasterUnitHandler(EventBus eventBus, HeroTeamsService heroTeamsService, 
+        public SelectMasterHeroHandler(EventBus eventBus, HeroTeamsService heroTeamsService, 
             TurnVisualPipeline turnVisualPipeline, UIService uiService)
         {
             _eventBus = eventBus;
@@ -76,24 +76,21 @@ namespace DefaultNamespace.Event_Bus.Handlers
 
         private void AddMarkerHeroInMasterTeam()
         {
-            IReadOnlyCollection<Entity> masters = _heroTeamsService.GetHeroes(_heroTeamsService.MasterTeam);
+            var attackers = _heroTeamsService[_heroTeamsService.MasterTeam].Heroes;
             int requiredIndex = _heroTeamsService[_heroTeamsService.MasterTeam].ActiveHeroIndex;
 
-            int count = 0;
-            
-            foreach (var master in masters)
+            for (int i = 0; i < attackers.Count; i++)
             {
-                if (count == requiredIndex)
+                if (i == requiredIndex)
                 {
-                    master.AddComponent(new MasterMarker());
+                    attackers[i].AddComponent(new MasterMarker());
                 }
                 else
                 {
-                    master.RemoveComponent<MasterMarker>();
+                    attackers[i].RemoveComponent<MasterMarker>();
                 }
-                
-                count++;
             }
+            
         }
     }
 }

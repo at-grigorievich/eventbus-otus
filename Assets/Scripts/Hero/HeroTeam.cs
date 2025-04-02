@@ -29,13 +29,18 @@ namespace DefaultNamespace.Hero
         }
         public void RemoveEntity(Entity entity)
         {
-            if(Heroes.Contains(entity) == false) return;
-            Heroes.Remove(entity);
+            entity.AddComponent(new DeathMarker());
         }
 
         public void MoveActiveHeroNext()
         {
-            if (++ActiveHeroIndex >= Heroes.Count) ActiveHeroIndex = 0;
+            ActiveHeroIndex++;
+            if (ActiveHeroIndex >= Heroes.Count) ActiveHeroIndex = 0;
+
+            if (Heroes[ActiveHeroIndex].TryGetComponent(out DeathMarker deathMarker) == true)
+            {
+                MoveActiveHeroNext();
+            }
         }
     }
 }

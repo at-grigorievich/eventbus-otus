@@ -4,21 +4,13 @@ namespace DefaultNamespace.Hero
 {
     public static class HeroExtensions
     {
-        public static bool TryGetHeroView(this HeroTeam team, UIService uiService,  Entity entity, out HeroView heroView)
+        public static HeroView GetHeroView(this Entity entity, UIService uiService)
         {
-            heroView = null;
-            
-            int index = team.Heroes.IndexOf(entity);
-            
-            if (index < 0) return false;
-            
-            HeroListView heroListView = team.TeamType == TeamType.Blue
+            HeroListView heroListView = (TeamType)entity.GetComponent<Team>().Value== TeamType.Blue
                 ? uiService.GetBluePlayer()
                 : uiService.GetRedPlayer();
 
-            heroView = heroListView.GetView(index);
-            
-            return true;
+            return heroListView.GetView(entity.GetComponent<ViewIndex>().Value);
         }
     }
 }

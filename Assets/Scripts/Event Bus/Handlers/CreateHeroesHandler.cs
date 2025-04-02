@@ -44,7 +44,8 @@ namespace DefaultNamespace.Event_Bus.Handlers
             for (var i = 0; i < heroes.Count; i++)
             {
                 Entity hero = heroes[i];
-                
+
+                hero.AddComponent(new ViewIndex { Value = i });
                 _turnVisualPipeline.AddTask(new ShowHeroViewTask(hero, _resolver));
             }
         }

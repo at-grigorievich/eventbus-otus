@@ -33,6 +33,13 @@ namespace DefaultNamespace
     {
         public byte Value;
     }
+
+    public class ViewIndex : IComponent
+    {
+        public int Value;
+    }
     
     public class MasterMarker : IComponent {}
+    
+    public class DeathMarker: IComponent {}
 }
