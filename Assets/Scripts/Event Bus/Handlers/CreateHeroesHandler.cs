@@ -23,16 +23,12 @@ namespace DefaultNamespace.Event_Bus.Handlers
         
         public override void OnEvent(CreateHeroesEvent evt)
         {
-            var heroes = 
-                _heroTeamsService.AddNewHeroes(evt.TeamType, evt.HeroCount);
-
-
-            for (var i = 0; i < heroes.Count; i++)
+            for (int i = 0; i < evt.HeroCount; i++)
             {
-                Entity hero = heroes[i];
-
-                hero.AddComponent(new ViewIndex { Value = i });
-                _turnVisualPipeline.AddTask(new ShowHeroViewTask(hero, _resolver));
+                Entity newHero = _heroTeamsService[evt.TeamType].AddNewHero();
+                
+                newHero.AddComponent(new ViewIndex { Value = i });
+                _turnVisualPipeline.AddTask(new ShowHeroViewTask(newHero, _resolver));
             }
         }
 

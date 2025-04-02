@@ -27,7 +27,7 @@ namespace DefaultNamespace.Event_Bus.Handlers
         {
             TeamType currentMasterTeam = _heroTeamsService.SwapMoveTeam();
             
-            _heroTeamsService.MoveMarkerToNextHero(currentMasterTeam);
+            _heroTeamsService[currentMasterTeam].MoveActiveHeroNext();
             
             RemoveMasterMarkerFromWaitTeam();
             AddMarkerHeroInMasterTeam();
@@ -43,7 +43,7 @@ namespace DefaultNamespace.Event_Bus.Handlers
         private void RemoveMasterMarkerFromWaitTeam()
         {
             TeamType waitTeam = _heroTeamsService.MasterTeam == TeamType.Blue ? TeamType.Red : TeamType.Blue;
-            IReadOnlyList<Entity> waiters = _heroTeamsService.GetHeroes(waitTeam);
+            IReadOnlyList<Entity> waiters = _heroTeamsService[waitTeam].Heroes;
 
             foreach (var e in waiters)
             {

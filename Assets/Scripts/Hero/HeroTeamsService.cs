@@ -16,53 +16,22 @@ namespace DefaultNamespace.Hero
         public readonly Dictionary<TeamType, HeroTeam> Teams = new ();
         
         public TeamType MasterTeam { get; set; } = TeamType.None;
-        
-        public HeroTeam this[TeamType val] => Teams.ContainsKey(val) ? Teams[val] : null;
+
+        public HeroTeam this[TeamType teamType]
+        {
+            get
+            {
+                if (Teams.ContainsKey(teamType) == false)
+                {
+                    Teams.Add(teamType, new HeroTeam(teamType, _heroFactory));
+                }
+                return Teams[teamType];
+            }
+        }
         
         public HeroTeamsService(IHeroFactory heroCreator)
         {
             _heroFactory = heroCreator;
-        }
-        
-        #region Add/Get/Remove Heroes
-        public IReadOnlyList<Entity> AddNewHeroes(TeamType teamType, int count)
-        {
-            for (int i = 0; i < count; i++)
-            {
-                AddNewHero(teamType);
-            }
-            
-            return Teams[teamType].Heroes;
-        }
-
-        public IReadOnlyList<Entity> GetHeroes(TeamType teamType)
-        {
-            return Teams.TryGetValue(teamType, value: out var team) == false 
-                ? new List<Entity>() 
-                : team.Heroes;
-        }
-        
-        public Entity AddNewHero(TeamType teamType)
-        {
-            if (Teams.ContainsKey(teamType) == false)
-            {
-                Teams.Add(teamType, new HeroTeam(teamType, _heroFactory));
-            }
-
-            return Teams[teamType].AddNewHero();
-        }
-
-        public void RemoveHero(TeamType teamType, Entity entity)
-        {
-            if (Teams.TryGetValue(teamType, out var team) == false) return;
-            team.RemoveEntity(entity);
-        }
-        #endregion
-
-        public void MoveMarkerToNextHero(TeamType teamType)
-        {
-            if (Teams.TryGetValue(teamType, out var team) == false) return;
-            team.MoveActiveHeroNext();
         }
         
         public TeamType SwapMoveTeam()

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DefaultNamespace.Hero
 {
@@ -11,7 +12,7 @@ namespace DefaultNamespace.Hero
         public TeamType TeamType { get; private set; }
 
         public int ActiveHeroIndex { get; private set; } = -1;
-
+        
         public HeroTeam(TeamType teamType, IHeroFactory factory)
         {
             TeamType = teamType;
@@ -42,5 +43,9 @@ namespace DefaultNamespace.Hero
                 MoveActiveHeroNext();
             }
         }
+
+        public bool IsAllDied() =>
+            Heroes.TrueForAll(hero => hero.TryGetComponent(out DeathMarker deathMarker) == true);
+        
     }
 }

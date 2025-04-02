@@ -1,16 +1,20 @@
-﻿using VContainer;
+﻿using DefaultNamespace.Hero;
+using VContainer;
 
 namespace DefaultNamespace
 {
     public class StartTurnPipelineTask: EventTask
     {
         private readonly TurnPipeline _turnPipeline;
+        private readonly HeroTeamWinner _heroTeamWinner;
+        
         private readonly IObjectResolver _objectResolver;
-
+        
         public StartTurnPipelineTask(IObjectResolver objectResolver)
         {
             _objectResolver = objectResolver;
             _turnPipeline = _objectResolver.Resolve<TurnPipeline>();
+            _heroTeamWinner = _objectResolver.Resolve<HeroTeamWinner>();
         }
         
         protected override void OnStart()
@@ -28,11 +32,15 @@ namespace DefaultNamespace
 
         private void OnPipelineCompleted()
         {
-            //_turnPipeline.OnCompleted -= OnPipelineCompleted;
+            if (_heroTeamWinner.HasWinner() == true)
+            {
+                _turnPipeline.OnCompleted -= OnPipelineCompleted;
+                Complete();
+                return;    
+            }
             
             _turnPipeline.Reset();
             _turnPipeline.Run();
-            //Complete();
         }
     }
 }

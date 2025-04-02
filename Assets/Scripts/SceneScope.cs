@@ -31,6 +31,8 @@ namespace DefaultNamespace
             builder.Register<TurnPipeline>(Lifetime.Singleton).AsSelf();
             builder.Register<TurnVisualPipeline>(Lifetime.Singleton).AsSelf();
             builder.Register<FightVisualPipeline>(Lifetime.Singleton).AsSelf();
+
+            builder.Register<HeroTeamWinner>(Lifetime.Singleton);
         }
     }
 }
