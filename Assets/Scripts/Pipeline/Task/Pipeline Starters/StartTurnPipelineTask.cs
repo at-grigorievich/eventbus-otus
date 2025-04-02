@@ -28,8 +28,11 @@ namespace DefaultNamespace
 
         private void OnPipelineCompleted()
         {
-            _turnPipeline.OnCompleted -= OnPipelineCompleted;
-            Complete();
+            //_turnPipeline.OnCompleted -= OnPipelineCompleted;
+            
+            _turnPipeline.Reset();
+            _turnPipeline.Run();
+            //Complete();
         }
     }
 }

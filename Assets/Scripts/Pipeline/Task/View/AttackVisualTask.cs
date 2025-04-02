@@ -1,6 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using DefaultNamespace.Hero;
 using UI;
+using Unity.VisualScripting;
 using VContainer;
 
 namespace DefaultNamespace
@@ -30,13 +31,33 @@ namespace DefaultNamespace
             _heroTeamsService[defenderTeam].TryGetHeroView(_uiService, _defenderEntity, out HeroView defenderView);
             _heroTeamsService[attackerTeam].TryGetHeroView(_uiService, _attackerEntity, out HeroView attackerView);
             
+            SetCanvasOrder(defenderTeam, false);
+            SetCanvasOrder(attackerTeam, true);
+            
             AnimateAttack(attackerView, defenderView).Forget();
+        }
+
+        protected override void OnComplete()
+        {
+            SetCanvasOrder(TeamType.Blue, false);
+            SetCanvasOrder(TeamType.Red, false);
+            
+            base.OnComplete();
         }
 
         private async UniTask AnimateAttack(HeroView attackerView, HeroView defenderView)
         {
             await attackerView.AnimateAttack(defenderView);
             Complete();
+        }
+
+        private void SetCanvasOrder(TeamType teamType, bool isActive)
+        {
+            HeroListView heroListView = teamType == TeamType.Blue
+                ? _uiService.GetBluePlayer()
+                : _uiService.GetRedPlayer();
+            
+            heroListView.SetActive(isActive);
         }
     }
 }

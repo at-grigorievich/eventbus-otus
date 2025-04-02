@@ -35,7 +35,7 @@ namespace DefaultNamespace.Hero
 
         public void MoveActiveHeroNext()
         {
-            if (++ActiveHeroIndex >= Heroes.Count) ActiveHeroIndex = -1;
+            if (++ActiveHeroIndex >= Heroes.Count) ActiveHeroIndex = 0;
         }
     }
 }

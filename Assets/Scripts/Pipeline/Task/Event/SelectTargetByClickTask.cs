@@ -25,7 +25,6 @@ namespace DefaultNamespace
         
         protected override void OnStart()
         {
-            Debug.Log(_heroTeamsService.MasterTeam);
             _defenderTeamType = _heroTeamsService.MasterTeam == 
                                 TeamType.Blue ? TeamType.Red : TeamType.Blue;
             _defenderHeroesView = _defenderTeamType == TeamType.Red 
