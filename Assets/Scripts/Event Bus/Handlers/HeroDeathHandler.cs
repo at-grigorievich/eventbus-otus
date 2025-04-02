@@ -27,6 +27,7 @@ namespace DefaultNamespace.Event_Bus.Handlers
             TeamType deathTeam = (TeamType)evt.Entity.GetComponent<Team>().Value;
             _heroTeamsService[deathTeam].RemoveEntity(evt.Entity);
             
+            _eventBus.Raise(new PlaySoundOnDeathEvent(evt.Entity));
             _fightVisualPipeline.AddTask(new DeathHeroVisualTask(_resolver, evt.Entity));
         }
 

@@ -1,5 +1,4 @@
 ﻿using DefaultNamespace.Event_Bus.Events;
-using UnityEngine;
 using VContainer;
 
 namespace DefaultNamespace

@@ -26,6 +26,8 @@ namespace DefaultNamespace
             builder.Register<HeroFightHandler>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<HeroDeathHandler>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<RechargeFightHandler>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<PlaySoundOnTurnHandler>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<PlaySoundOnDeathHandler>(Lifetime.Singleton).AsImplementedInterfaces();
             
             builder.Register<RootPipeline>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<TurnPipeline>(Lifetime.Singleton).AsSelf();

@@ -38,6 +38,17 @@ namespace DefaultNamespace
     {
         public int Value;
     }
+
+    public class StartTurnSounds : IComponent
+    {
+        public AudioClip[] Values;
+    }
+
+    public class DeathSound : IComponent
+    {
+        public AudioClip Value;
+    }
+    
     
     public class MasterMarker : IComponent {}
     

@@ -19,3 +19,9 @@ MonoBehaviour:
     \u0443\u0440\u043E\u043D\u0430"
   <Damage>k__BackingField: 10
   <Health>k__BackingField: 25
+  <StartTurnSounds>k__BackingField:
+  - {fileID: 8300000, guid: b65f0a22d77274a0c991c9ce95d35b64, type: 3}
+  - {fileID: 8300000, guid: 948c84e2313e5445a9443f16d7ac6ed8, type: 3}
+  - {fileID: 8300000, guid: 520822e61b1144d7588d5eb6a675e23b, type: 3}
+  - {fileID: 8300000, guid: b21a2acc523ba49979498d782ce51021, type: 3}
+  <DeathSound>k__BackingField: {fileID: 8300000, guid: 1ce6128bf170245efb97b330945a50b8, type: 3}

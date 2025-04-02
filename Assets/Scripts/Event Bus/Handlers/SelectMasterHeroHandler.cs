@@ -61,6 +61,7 @@ namespace DefaultNamespace.Event_Bus.Handlers
                 if (i == requiredIndex)
                 {
                     attackers[i].AddComponent(new MasterMarker());
+                    _eventBus.Raise(new PlayRandomTurnSoundEvent(attackers[i]));
                 }
                 else
                 {
