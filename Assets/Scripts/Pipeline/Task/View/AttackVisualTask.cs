@@ -1,7 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using DefaultNamespace.Hero;
 using UI;
-using VContainer;
 
 namespace DefaultNamespace
 {
@@ -12,12 +11,12 @@ namespace DefaultNamespace
 
         private readonly UIService _uiService;
 
-        public AttackVisualTask(Entity attackerEntity, Entity defenderEntity, IObjectResolver resolver)
+        public AttackVisualTask(Entity attackerEntity, Entity defenderEntity, UIService uiService)
         {
             _attackerEntity = attackerEntity;
             _defenderEntity = defenderEntity;
-            
-            _uiService = resolver.Resolve<UIService>();
+
+            _uiService = uiService;
         }
         
         protected override void OnStart()

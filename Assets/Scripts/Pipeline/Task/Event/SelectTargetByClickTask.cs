@@ -42,7 +42,7 @@ namespace DefaultNamespace
             Entity defender = GetDefenderEntity(obj);
             
             _eventBus.Raise(new FightEvent(attacker, defender));
-            _eventBus.Raise(new RechargeFightEvent(attacker, defender));
+            //_eventBus.Raise(new FightEvent(defender, attacker));
             
             Complete();
         }

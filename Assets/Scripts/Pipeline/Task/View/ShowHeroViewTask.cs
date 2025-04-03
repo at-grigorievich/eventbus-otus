@@ -11,10 +11,10 @@ namespace DefaultNamespace
         private readonly UIService _uiService;
         private readonly Entity _heroEntity;
         
-        public ShowHeroViewTask(Entity heroEntity, IObjectResolver resolver)
+        public ShowHeroViewTask(Entity heroEntity, UIService uiService)
         {
             _heroEntity = heroEntity;
-            _uiService = resolver.Resolve<UIService>();
+            _uiService = uiService;
         }
         
         protected override void OnStart()

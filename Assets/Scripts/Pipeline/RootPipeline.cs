@@ -5,7 +5,7 @@ using VContainer.Unity;
 
 namespace DefaultNamespace
 {
-    public class RootPipeline: Pipeline, IInitializable
+    public class RootPipeline: Pipeline, IInitializable, IPostStartable
     {
         private const int UNITS_PER_TEAM = 4;
             
@@ -21,13 +21,17 @@ namespace DefaultNamespace
         public void Initialize()
         {
             OnCompleted += OnCompletedCallback;
+            
             AddTask(new CreateHeroesTask(_objectResolver, UNITS_PER_TEAM));
             AddTask(new StartTurnPipelineTask(_objectResolver));
-            
+        }
+
+        public void PostStart()
+        {
             Reset();
             Run();
         }
-
+        
         private void OnCompletedCallback()
         {
             OnCompleted += OnCompletedCallback;

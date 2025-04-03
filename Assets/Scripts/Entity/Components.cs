@@ -21,6 +21,7 @@ namespace DefaultNamespace
 
     public class Health : IComponent
     {
+        public int Base;
         public int Value;
     }
 
@@ -48,9 +49,18 @@ namespace DefaultNamespace
     {
         public AudioClip Value;
     }
+
+    public class LowHealthSound : IComponent
+    {
+        public AudioClip Value;
+    }
     
     
     public class MasterMarker : IComponent {}
     
     public class DeathMarker: IComponent {}
+    
+    public class AttackerMarker : IComponent {}
+    
+    public class DamagedMarker : IComponent {}
 }

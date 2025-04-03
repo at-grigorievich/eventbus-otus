@@ -30,3 +30,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 24ea30ee053054a85b364e3e8d898895, type: 3}
   - {fileID: 8300000, guid: 5939d99aa7ba34992be48ead7acab59f, type: 3}
   <DeathSound>k__BackingField: {fileID: 8300000, guid: f39f9cf73887b47b79d98618433ecc22, type: 3}
+  <LowHealthSound>k__BackingField: {fileID: 8300000, guid: def0bb40c1b6e487793c7e472e79964d, type: 3}

@@ -10,10 +10,10 @@ namespace DefaultNamespace
         private readonly Entity _entity;
         private readonly UIService _uiService;
 
-        public DeathHeroVisualTask(IObjectResolver resolver, Entity deathEntity)
+        public DeathHeroVisualTask(Entity deathEntity, UIService uiService)
         {
             _entity = deathEntity;
-            _uiService = resolver.Resolve<UIService>();
+            _uiService = uiService;
         }
         
         protected override void OnStart()

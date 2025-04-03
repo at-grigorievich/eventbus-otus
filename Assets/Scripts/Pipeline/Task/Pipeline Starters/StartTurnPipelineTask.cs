@@ -24,7 +24,14 @@ namespace DefaultNamespace
             _turnPipeline.AddTask(new NextMoveTask(_objectResolver));
             _turnPipeline.AddTask(new StartVisualTurnPipelineTask(_objectResolver));
             _turnPipeline.AddTask(new SelectTargetByClickTask(_objectResolver));
+            _turnPipeline.AddTask(new CheckDeathTask(_objectResolver));
+            _turnPipeline.AddTask(new CounterFightTask(_objectResolver));
+            _turnPipeline.AddTask(new CheckDamagedHeroTask(_objectResolver));
+            _turnPipeline.AddTask(new CheckDeathTask(_objectResolver));
             _turnPipeline.AddTask(new StartAttackVisualPipeline(_objectResolver));
+            
+            //cleaners here
+            _turnPipeline.AddTask(new RemoveMarkersTask(_objectResolver));
             
             _turnPipeline.Reset();
             _turnPipeline.Run();

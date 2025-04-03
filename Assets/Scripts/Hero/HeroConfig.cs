@@ -16,13 +16,16 @@ namespace DefaultNamespace.Hero
         
         [field: SerializeField] public AudioClip DeathSound { get; private set; }
         
+        [field: SerializeField] public AudioClip LowHealthSound { get; private set; }
+        
         public Entity CreateHeroEntity() => new Entity()
                 .AddComponent(new Name { Value = Name })
                 .AddComponent(new Icon { Value = Icon })
                 .AddComponent(new Description { Value = Description })
                 .AddComponent(new Damage { Value = Damage })
-                .AddComponent(new Health { Value = Health })
+                .AddComponent(new Health { Base = Health, Value = Health })
                 .AddComponent(new StartTurnSounds { Values = StartTurnSounds })
-                .AddComponent(new DeathSound { Value = DeathSound});
+                .AddComponent(new DeathSound { Value = DeathSound})
+                .AddComponent(new LowHealthSound { Value = LowHealthSound});
     }
 }
